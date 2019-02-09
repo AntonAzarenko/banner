@@ -36,16 +36,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User getByLogin(String login) {
-        return userRepository.getByLogin(login);
-    }
-
-    @Override
-    public List<User> getAll() {
-        return null;
-    }
-
-    @Override
     public String getUserName() {
         LoggedUser loggedUser = LoggedUser.safeGet();
         if (loggedUser != null) {

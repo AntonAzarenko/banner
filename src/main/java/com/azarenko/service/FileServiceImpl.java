@@ -26,14 +26,11 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void upload(MultipartFile file) {
-        String name = null;
-        String filePath = null;
-        String fileUrl = null;
         try {
             byte[] bytes = file.getBytes();
-            name = file.getOriginalFilename();
+            String name = file.getOriginalFilename();
 
-            filePath = context.getRealPath("") + "/resources" + File.separator + "uploads" + File.separator + LoggedUser.safeGet().getUsername()+ File.separator + "image";
+            String filePath = context.getRealPath("") + "/resources" + File.separator + "uploads" + File.separator + LoggedUser.safeGet().getUsername() + File.separator + "image";
 
             Path resourceDirectory = Paths.get(filePath);
 
