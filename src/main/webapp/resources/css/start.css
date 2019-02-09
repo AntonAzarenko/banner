@@ -1,0 +1,42 @@
+.container{
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.message {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: red;
+}
+
+.title {
+    color: black;
+    font-size: 56px;
+    text-align: center;
+    align-content: center;
+}
+
+.user {
+    margin-left: 60%;
+    font-size: 32px;
+    color: #2c536c;
+}
+
+.button {
+    margin: 3px 0 5px 0;
+    padding: 5px 5px;
+    font-size: 25px;
+    color: #1d17ff;
+    background-color: #6073c6;
+    border: none;
+    border-bottom: 4px solid #482cfd;
+    cursor: pointer;
+    padding-bottom: 5px;
+    text-align: center;
+}
+.button:hover {
+    transition: 0.5s;
+    background-color: #fff;
+    color: #2c536c;
+}
