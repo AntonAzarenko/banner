@@ -7,6 +7,7 @@ import com.azarenko.to.ImageNameTO;
 import com.azarenko.web.LoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -19,11 +20,13 @@ public class BannerServiceImpl implements BannerService {
     BannerRepository repository;
 
     @Override
+    @Transactional
     public void save(Banner banner) {
         repository.save(banner);
     }
 
     @Override
+    @Transactional
     public void add(MultipartFile file) {
         Banner banner = create(file);
         save(banner);
@@ -49,6 +52,7 @@ public class BannerServiceImpl implements BannerService {
     }
 
     @Override
+    @Transactional
     public void remove(Long id) {
         repository.deleteById(id);
     }
