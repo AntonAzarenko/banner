@@ -14,4 +14,6 @@ public interface BannerRepository extends JpaRepository<Banner, Long> {
     List<Banner> getBannersByUser_Id(Long id);
 
     Banner getById(Long id);
+
+    Banner getByName(String name);
 }

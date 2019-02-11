@@ -4,7 +4,7 @@ import com.azarenko.entity.User;
 
 public interface UserService {
 
-    void add(User user);
+    boolean add(User user);
 
     String getUserName();
 }

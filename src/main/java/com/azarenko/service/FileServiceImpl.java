@@ -29,20 +29,21 @@ public class FileServiceImpl implements FileService {
         try {
             byte[] bytes = file.getBytes();
             String name = file.getOriginalFilename();
+            if(checkImage(name)) {
+                String filePath = context.getRealPath("") + "/resources" + File.separator + "uploads" + File.separator + LoggedUser.safeGet().getUsername() + File.separator + "image";
 
-            String filePath = context.getRealPath("") + "/resources" + File.separator + "uploads" + File.separator + LoggedUser.safeGet().getUsername() + File.separator + "image";
+                Path resourceDirectory = Paths.get(filePath);
 
-            Path resourceDirectory = Paths.get(filePath);
-
-            File dir = new File(resourceDirectory + File.separator);
-            if (!dir.exists()) {
-                dir.mkdirs();
+                File dir = new File(resourceDirectory + File.separator);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File loadFile = new File(dir.getAbsolutePath() + File.separator + name);
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(loadFile));
+                stream.write(bytes);
+                stream.flush();
+                stream.close();
             }
-            File loadFile = new File(dir.getAbsolutePath() + File.separator + name);
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(loadFile));
-            stream.write(bytes);
-            stream.flush();
-            stream.close();
         } catch (IOException e) {
 
         }
@@ -76,5 +77,9 @@ public class FileServiceImpl implements FileService {
         String userName = LoggedUser.safeGet().getUsername();
         String path = "resources/uploads/" + userName + "/image/";
         return path;
+    }
+
+    private boolean checkImage(String name) {
+        return bannerService.getBunnersByName(name) == null;
     }
 }

@@ -29,7 +29,9 @@ public class BannerServiceImpl implements BannerService {
     @Transactional
     public void add(MultipartFile file) {
         Banner banner = create(file);
-        save(banner);
+        if(banner != null) {
+            save(banner);
+        }
     }
 
     @Override
@@ -62,6 +64,11 @@ public class BannerServiceImpl implements BannerService {
         return repository.getById(id);
     }
 
+    @Override
+    public Banner getBunnersByName(String name) {
+        return repository.getByName(name);
+    }
+
     private ImageNameTO converterBannerToImageName(Banner banner) {
         ImageNameTO imageNameTO = new ImageNameTO();
         String fullname = banner.getName() + "." + banner.getType();
@@ -72,11 +79,17 @@ public class BannerServiceImpl implements BannerService {
 
     private Banner create(MultipartFile file) {
         String fileName = file.getOriginalFilename();
-        String[] temp = fileName.split("\\.");
-        String name = temp[0];
-        String type = temp[1];
-        User user = new User();
-        user.setId(LoggedUser.getId());
-        return new Banner(name, type, user);
+            String[] temp = fileName.split("\\.");
+            String name = temp[0];
+            String type = temp[1];
+            User user = new User();
+            user.setId(LoggedUser.getId());
+        if(checkImage(name)) {
+            return new Banner(name, type, user);
+        }
+        return null;
+    }
+    private boolean checkImage(String name){
+        return repository.getByName(name) == null;
     }
 }

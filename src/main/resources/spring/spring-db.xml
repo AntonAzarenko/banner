@@ -52,5 +52,4 @@
               p:entityManagerFactory-ref="entityManagerFactory">
         </bean>
     </beans>
-
 </beans>

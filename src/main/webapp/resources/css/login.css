@@ -23,4 +23,9 @@ input[type="text"], input[type="password"] {
     align-content: center;
 }
 
+.message{
+    color: red;
+    text-align: center;
+    align-content: center;
+}
 

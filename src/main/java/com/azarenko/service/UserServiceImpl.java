@@ -30,9 +30,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional
-    public void add(User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
-        userRepository.save(user);
+    public boolean add(User user) {
+        if(checkUser(user)) {
+            user.setPassword(encoder.encode(user.getPassword()));
+            User newUser = userRepository.save(user);
+            return newUser != null;
+        }
+        return false;
     }
 
     @Override
@@ -42,5 +46,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
              return loggedUser.getUserNick();
              }
         return null;
+    }
+
+    private boolean checkUser(User user){
+        User newUser = userRepository.getByLogin(user.getLogin());
+        return newUser == null && !user.getLogin().isEmpty();
     }
 }

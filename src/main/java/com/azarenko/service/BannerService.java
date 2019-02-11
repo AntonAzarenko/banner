@@ -21,4 +21,6 @@ public interface BannerService {
     void remove(Long id);
 
     Banner getBannersById(Long id);
+
+    Banner getBunnersByName(String name);
 }

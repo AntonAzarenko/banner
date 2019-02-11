@@ -20,6 +20,9 @@
                     Вы не вошли в приложение
                 </c:if>
             </li>
+
+            <h4>${message}</h4>
+
             <div class="button">
                 <a href="login">Войти</a>
             </div>
